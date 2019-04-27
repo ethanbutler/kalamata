@@ -1,0 +1,60 @@
+@mixin shadow() {
+  box-shadow:
+    0 8px 8px -2px rgba(0,0,0,.5);
+}
+
+@mixin hatch() {
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    background:
+    repeating-linear-gradient(
+      45deg,
+      #688182,
+      #688182 5px,
+      transparent 5px,
+      transparent 20px
+    );
+    background-attachment: fixed;
+    z-index: 0;
+  }
+}
+
+@mixin noRadiusBelowBreakpoint() {
+  @media (max-width: 699px) {
+    border-radius: 0;
+    &:before {
+      border-radius: 0;
+    }
+  }
+}
+
+@mixin bg(
+  $basis: 'left',
+  $borderRadius: '25px',
+  $from: green,
+  $to: blue,
+) {
+  position: relative;
+  box-sizing: content-box;
+  &:before {
+    @include shadow();
+    content: '';
+    display: block;
+    position: absolute;
+    #{$basis}: 0;
+    top: $gap / -2;
+    bottom: $gap / -2;
+    width: $effective-width;
+    background: linear-gradient(45deg, $from, $to);
+    background-attachment: fixed;
+    border-radius: #{$borderRadius};
+    z-index: 0;
+  }
+}

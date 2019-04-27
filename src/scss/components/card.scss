@@ -1,0 +1,188 @@
+@import '../variables';
+@import '../mixins';
+
+.card {
+  @include hatch();
+  margin: 80px auto;
+  color: #333;
+  box-sizing: content-box;
+  width: $effective-width;
+
+  @media(min-width: $breakpoint) {
+    display: grid;
+    grid-template-areas:
+      'category image'
+      'title    image'
+      'main     description'
+      'main     meta'
+      'main     related'
+      'main     .'
+      'footer   footer';
+    grid-template-columns: auto $sidebar;
+    grid-column-gap: $gap;
+    grid-row-gap: $gap-y;
+  }
+
+  &-category {
+    grid-area: category;
+    margin: var(--margin);
+    padding: $radius / 2 $radius;
+    color: #688182;
+    text-transform: uppercase;
+    align-self: end;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  &-title {
+    @include bg(
+      'left',
+      '#{$radius} #{$radius} 0 0',
+      #70FF95,
+      #56C4C4,
+    );
+    padding: 0 $radius;
+    grid-area: title;
+    margin: var(--margin);
+    text-align: right;
+    h1 {
+      padding: $gap $radius $gap * 3;
+      font-size: 38px;
+      color: white;
+    }
+  }
+
+  &-image {
+    @include shadow();
+    grid-area: image;
+    border-radius: $radius;
+    overflow: hidden;
+    height: 150px;
+    margin: var(--margin);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @include noRadiusBelowBreakpoint();
+  }
+
+  &-meta {
+    @include bg(
+      'right',
+      $radius,
+      #FFD670,
+      #FF708F,
+    );
+    @include noRadiusBelowBreakpoint();
+    padding: $gap;
+    grid-area: meta;
+  }
+
+  &-description {
+    @include bg(
+      'right',
+      '0 0 #{$radius} #{$radius}',
+      #70FF95,
+      #56C4C4,
+    );
+    grid-area: description;
+    padding: $gap;
+    color: white;
+    @include noRadiusBelowBreakpoint();
+  }
+
+  &-body {
+    @include shadow();
+    display: flex;
+    flex-direction: column;
+    grid-area: main;
+    font-size: 17px;
+    @media (min-width: 700px) {
+      margin: $gap * -2 $gap * 2 $gap-y * -1.5;
+    }
+    padding: $gap * 3;
+    background: white;
+    border-radius: $radius;
+    @include noRadiusBelowBreakpoint();
+    z-index: 2;
+    
+    .instructions {
+      flex: 1;
+    }
+    
+    .nutrition {
+      background: #688182;
+      padding: $radius;
+      border-radius: $radius / 2;
+      overflow: hidden;
+      color: white;
+    }
+    
+    h2 {
+      margin: 0 0 1ch;
+    }
+    
+    ul {
+      margin: 0 0 3ch;
+    }
+  }
+
+  &-related {
+    @include bg(
+      'right',
+      '25px',
+      #9F74C7,
+      #556285
+    );
+    @include noRadiusBelowBreakpoint();
+    position: sticky;
+    top: $bar;
+    &:before {
+      border-bottom-right-radius: $radius;
+      border-bottom-left-radius: $radius;
+    }
+    grid-area: related;
+    padding: $gap;
+    color: white;
+
+    h2 {
+      font-family: 'Permanent Marker';
+      font-size: 20px;
+      margin: 0 0 .25em;
+    }
+
+    li {
+      line-height: 1.1;
+      margin: 0 0 1ch;
+    }
+
+    a {
+      color: rgba(white, .8);
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  &-footer {
+    @include bg(
+      'left',
+      '25px',
+      #D9877E,
+      #857755
+    );
+    @include noRadiusBelowBreakpoint();
+    display: flex;
+    grid-area: footer;
+    padding: $gap-y $radius $gap;
+
+    &Left {
+      flex: 1;
+    }
+
+    &Right {
+      width: $sidebar;
+    }
+  }
+}

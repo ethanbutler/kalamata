@@ -1,0 +1,21 @@
+// Layout
+$breakpoint: 768px;
+$bar: 22px;
+$gap: 10px;
+$gap-y: 60px;
+$width: 60ch;
+$effective-width: var(--width);
+$sidebar: 20ch;
+$radius: 25px;
+
+:root {
+  --width: 90vw;
+  --margin: 0;
+}
+
+@media(min-width: $breakpoint) {
+  :root {
+    --margin: 0 0 #{$gap-y * -1};
+    --width: #{$width};
+  }
+}
