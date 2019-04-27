@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1 class="wordmark">
-      <a href="">
+      <a href="<?= home_url(); ?>">
         RV
       </a>
     </h1>
